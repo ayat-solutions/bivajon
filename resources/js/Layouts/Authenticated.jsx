@@ -1,20 +1,8 @@
-import React, { useState } from "react";
-import ApplicationLogo from "@/Components/ApplicationLogo";
-import Dropdown from "@/Components/Dropdown";
-import NavLink from "@/Components/NavLink";
+import React from "react";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/inertia-react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import {
-    BadgeCheckIcon,
-    ChevronDownIcon,
-    ChevronRightIcon,
-    CollectionIcon,
-    SearchIcon,
-    SortAscendingIcon,
-    StarIcon,
-} from "@heroicons/react/solid";
+import { SearchIcon } from "@heroicons/react/solid";
 import { MenuAlt1Icon, XIcon } from "@heroicons/react/outline";
 
 const navigation = [
@@ -25,55 +13,14 @@ const userNavigation = [
     { name: "Your Profile", href: "#" },
     { name: "Settings", href: "#" },
 ];
-const projects = [
-    {
-        name: "Workcation",
-        href: "#",
-        siteHref: "#",
-        repoHref: "#",
-        repo: "debbielewis/workcation",
-        tech: "Laravel",
-        lastDeploy: "3h ago",
-        location: "United states",
-        starred: true,
-        active: true,
-    },
-    // More projects...
-];
-const activityItems = [
-    {
-        project: "Workcation",
-        commit: "2d89f0c8",
-        environment: "production",
-        time: "1h",
-    },
-    // More items...
-];
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 
-export default function Authenticated({ auth, children }) {
+export default function Authenticated({ children }) {
     return (
         <>
-            {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full">
-        <body class="h-full">
-        ```
-      */}
-            {/* Background color split screen for large screens */}
-            {/* <div
-                className="fixed top-0 left-0 w-1/2 h-full bg-white"
-                aria-hidden="true"
-            />
-            <div
-                className="fixed top-0 right-0 w-1/2 h-full bg-gray-50"
-                aria-hidden="true"
-            /> */}
             <div className="relative min-h-full flex flex-col">
                 {/* Navbar */}
                 <Disclosure as="nav" className="flex-shrink-0 bg-indigo-600">
