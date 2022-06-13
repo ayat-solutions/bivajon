@@ -1,9 +1,9 @@
 import "./bootstrap";
 
 import React from "react";
-import { render } from "react-dom";
-import { createInertiaApp } from "@inertiajs/inertia-react";
-import { InertiaProgress } from "@inertiajs/progress";
+import {createRoot} from "react-dom/client";
+import {createInertiaApp} from "@inertiajs/inertia-react";
+import {InertiaProgress} from "@inertiajs/progress";
 
 const appName =
     window.document.getElementsByTagName("title")[0]?.innerText || "Bivajon";
@@ -11,8 +11,9 @@ const appName =
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) => require(`./Pages/${name}`),
-    setup({ el, App, props }) {
-        return render(<App {...props} />, el);
+    setup({el, App, props}) {
+        const root = createRoot(el);
+        root.render(<App {...props} />);
     },
 });
 
