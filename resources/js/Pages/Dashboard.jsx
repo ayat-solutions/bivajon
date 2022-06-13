@@ -11,15 +11,6 @@ import {
     StarIcon,
 } from "@heroicons/react/solid";
 
-const navigation = [
-    { name: "Dashboard", href: "#", current: true },
-    { name: "Projects", href: "#", current: false },
-];
-const userNavigation = [
-    { name: "Your Profile", href: "#" },
-    { name: "Settings", href: "#" },
-    { name: "Sign out", href: "#" },
-];
 const projects = [
     {
         name: "Bivajon",
