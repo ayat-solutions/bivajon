@@ -28,6 +28,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/projects', \App\Http\Controllers\ProjectsController::class)->middleware(['auth', 'verified']);
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::resource('/projects', \App\Http\Controllers\ProjectsController::class);
+});
+
 
 require __DIR__.'/auth.php';
