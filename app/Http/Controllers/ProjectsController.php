@@ -13,7 +13,9 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Project/index');
+        return Inertia::render('Project/index', [
+            'projects' => Project::all(),
+        ]);
     }
 
     public function show(Project $project)
