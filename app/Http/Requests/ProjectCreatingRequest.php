@@ -4,6 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property string $title
+ * @property string $description
+ */
 class ProjectCreatingRequest extends FormRequest
 {
     /**
@@ -24,7 +28,8 @@ class ProjectCreatingRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'title' => ['required', 'string', 'max:128'],
+            'description' => ['required', 'string', 'max:255'],
         ];
     }
 }

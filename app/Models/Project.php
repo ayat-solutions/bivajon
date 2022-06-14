@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Spatie\EventSourcing\Projections\Projection;
 
-class Project extends Model
+class Project extends Projection
 {
-    use HasFactory;
+    protected $guarded = [];
 }

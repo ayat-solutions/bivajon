@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\CreateProjectAction;
+use App\DataTransferObjects\ProjectDTO;
 use App\Http\Requests\ProjectCreatingRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -21,11 +23,12 @@ class ProjectsController extends Controller
         ]);
     }
 
-    public function store(ProjectCreatingRequest $project)
+    public function store(ProjectCreatingRequest $projectCreatingRequest)
     {
+        $projectUuid = CreateProjectAction::execute(
+            ProjectDTO::fromProjectCreatingRequest($projectCreatingRequest)
+        );
 
-        return Inertia::render('Project/index', [
-            'project' => $project,
-        ]);
+        return redirect()->route('projects.index');
     }
 }
