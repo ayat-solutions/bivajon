@@ -131,11 +131,9 @@ export default function Authenticated({ children }) {
                                                 >
                                                     <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
                                                         {userNavigation.map(
-                                                            (item) => (
+                                                            (item, index) => (
                                                                 <Menu.Item
-                                                                    key={
-                                                                        item.name
-                                                                    }
+                                                                    key={index}
                                                                 >
                                                                     {({
                                                                         active,
@@ -180,9 +178,9 @@ export default function Authenticated({ children }) {
 
                             <Disclosure.Panel className="lg:hidden">
                                 <div className="px-2 pt-2 pb-3 space-y-1">
-                                    {navigation.map((item) => (
+                                    {navigation.map((item, index) => (
                                         <Disclosure.Button
-                                            key={item.name}
+                                            key={index}
                                             as="a"
                                             href={item.href}
                                             className={classNames(
@@ -203,9 +201,9 @@ export default function Authenticated({ children }) {
                                 </div>
                                 <div className="pt-4 pb-3 border-t border-indigo-800">
                                     <div className="px-2 space-y-1">
-                                        {userNavigation.map((item) => (
+                                        {userNavigation.map((item, index) => (
                                             <Disclosure.Button
-                                                key={item.name}
+                                                key={index}
                                                 as="a"
                                                 href={item.href}
                                                 className="block px-3 py-2 rounded-md text-base font-medium text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600"

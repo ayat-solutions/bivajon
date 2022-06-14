@@ -346,8 +346,8 @@ export default function Details(props) {
                                 role="list"
                                 className="divide-y divide-gray-200"
                             >
-                                {activityItems.map((item) => (
-                                    <li key={item.commit} className="py-4">
+                                {activityItems.map((item, index) => (
+                                    <li key={index} className="py-4">
                                         <div className="flex space-x-3 pr-5">
                                             <img
                                                 className="h-6 w-6 rounded-full"

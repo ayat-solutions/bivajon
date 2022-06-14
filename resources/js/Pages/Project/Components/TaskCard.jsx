@@ -4,8 +4,8 @@ import { ItemTypes } from "../Types/items";
 
 export default function TaskCard(props) {
     const [{ isDragging }, drag] = useDrag({
+        type: ItemTypes.CARD,
         item: {
-            type: ItemTypes.CARD,
             id: props.id,
         },
         collect: (monitor) => ({

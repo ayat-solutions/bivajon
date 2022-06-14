@@ -1,10 +1,10 @@
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "../Types/items";
 import { useContext } from "react";
-// import { CardContext } from "../../Project";
+import { CardContext } from "../../Project";
 
-const BoxTarget = (props) => {
-    // const { markAsDone } = useContext(CardContext);
+const TaskTarget = (props) => {
+    const { markAsDone } = useContext(CardContext);
 
     const [{ isOver }, drop] = useDrop({
         accept: ItemTypes.CARD,
@@ -18,10 +18,9 @@ const BoxTarget = (props) => {
         <div
             ref={drop}
             className={
-                "flex flex-col justify-center items-center m-2 p-3 shadow-sm min-h-min w-full rounded-md text-white" +
                 isOver
-                    ? " green.500"
-                    : " green.200"
+                    ? " bg-gray-200 border-blue-100 rounded-lg shadow-sm divide-y divide-gray-20"
+                    : " bg-gray-100 border-blue-100 rounded-lg shadow-sm divide-y divide-gray-20"
             }
         >
             {props.children}
@@ -29,4 +28,4 @@ const BoxTarget = (props) => {
     );
 };
 
-export default BoxTarget;
+export default TaskTarget;

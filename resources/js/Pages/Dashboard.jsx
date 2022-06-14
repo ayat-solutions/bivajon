@@ -204,9 +204,9 @@ export default function Dashboard(props) {
                             role="list"
                             className="relative z-0 divide-y divide-gray-200 border-b border-gray-200"
                         >
-                            {projects.map((project) => (
+                            {projects.map((project, index) => (
                                 <li
-                                    key={project.repo}
+                                    key={index}
                                     className="relative pl-4 pr-6 py-5 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6"
                                 >
                                     <div className="flex items-center justify-between space-x-4">
@@ -337,8 +337,8 @@ export default function Dashboard(props) {
                                 role="list"
                                 className="divide-y divide-gray-200"
                             >
-                                {activityItems.map((item) => (
-                                    <li key={item.commit} className="py-4">
+                                {activityItems.map((item, index) => (
+                                    <li key={index} className="py-4">
                                         <div className="flex space-x-3 pr-5">
                                             <img
                                                 className="h-6 w-6 rounded-full"
