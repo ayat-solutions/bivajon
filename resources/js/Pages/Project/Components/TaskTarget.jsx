@@ -1,7 +1,7 @@
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "../Types/items";
 import { useContext } from "react";
-import { CardContext } from "../../Project";
+import { CardContext } from "../../Project/Details";
 
 const TaskTarget = (props) => {
     const { markAsDone } = useContext(CardContext);
