@@ -90,7 +90,7 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                                     <div className="mt-4 ">
                                         <button
                                             type="submit"
-                                            className="w-full font-bold inline-flex justify-center rounded-md border border-transparent text-white bg-indigo-500 px-4 py-2 text-sm hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                                            className="w-full font-bold inline-flex justify-center rounded-md border border-transparent text-white bg-indigo-500 px-4 py-2 text-sm hover:bg-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                                         >
                                             Create
                                         </button>
