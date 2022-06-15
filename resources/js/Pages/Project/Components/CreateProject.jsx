@@ -1,8 +1,10 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
 import { Fragment, useState } from "react";
 
 export default function CreateProject({ isOpen, setIsOpen }) {
+    const { errors } = usePage().props;
     const [values, setValues] = useState({
         title: "",
         description: "",
@@ -17,11 +19,18 @@ export default function CreateProject({ isOpen, setIsOpen }) {
         }));
     }
 
-    function handleSubmit(e) {
+    function isObjectEmpty(obj) {
+        return Object.keys(obj).length === 0;
+    }
+
+    async function handleSubmit(e) {
         e.preventDefault();
         Inertia.post("/projects", values);
-        setIsOpen(false);
+        if (isObjectEmpty(errors)) {
+            setIsOpen(false);
+        }
     }
+
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog
@@ -71,6 +80,11 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                                             onChange={handleChange}
                                             id="title"
                                         />
+                                        {errors.title && (
+                                            <div className="m-1 text-red-500">
+                                                {errors.title}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="flex flex-col mb-4">
                                         <label className="mb-2 font-bold text-lg text-gray-900">
@@ -83,6 +97,11 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                                             onChange={handleChange}
                                             id="description"
                                         />
+                                        {errors.description && (
+                                            <div className="m-1 text-red-500">
+                                                {errors.description}
+                                            </div>
+                                        )}
                                     </div>
                                     <div className="mt-4 ">
                                         <button

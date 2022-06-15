@@ -1,21 +1,6 @@
 import Authenticated from "@/Layouts/Authenticated";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CreateProject from "./Components/CreateProject";
-
-const projects = [
-    {
-        title: "Bivajon",
-        description: "Bivajon is a project management system",
-        status: "Active",
-        date: "2022-06-13",
-    },
-    {
-        title: "Let's Learn",
-        description: "Bivajon is a learning management system",
-        status: "Active",
-        date: "2022-03-13",
-    },
-];
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -23,6 +8,7 @@ function classNames(...classes) {
 
 export default function Projects(props) {
     const [isOpen, setIsOpen] = useState(false);
+
     return (
         <Authenticated auth={props.auth} errors={props.errors}>
             <div className="mt-5 px-4 sm:px-6 lg:px-8">
@@ -91,34 +77,40 @@ export default function Projects(props) {
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-200 bg-white">
-                                            {projects.map((project, index) => (
-                                                <tr key={index}>
-                                                    <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                        {project.title}
-                                                    </td>
-                                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        {project.description}
-                                                    </td>
-                                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        {project.status}
-                                                    </td>
-                                                    <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                        {project.date}
-                                                    </td>
-                                                    <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                        <a
-                                                            href="#"
-                                                            className="text-indigo-600 hover:text-indigo-900"
-                                                        >
-                                                            Edit
-                                                            <span className="sr-only">
-                                                                ,{" "}
-                                                                {project.title}
-                                                            </span>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            ))}
+                                            {props.projects.map(
+                                                (project, index) => (
+                                                    <tr key={index}>
+                                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                                                            {project.title}
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {
+                                                                project.description
+                                                            }
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {project.status}
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            {project.date}
+                                                        </td>
+                                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                                                            <a
+                                                                href="#"
+                                                                className="text-indigo-600 hover:text-indigo-900"
+                                                            >
+                                                                Edit
+                                                                <span className="sr-only">
+                                                                    ,{" "}
+                                                                    {
+                                                                        project.title
+                                                                    }
+                                                                </span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            )}
                                         </tbody>
                                     </table>
                                 </div>

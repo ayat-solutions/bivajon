@@ -31,6 +31,6 @@ class ProjectsController extends Controller
             ProjectDTO::fromProjectCreatingRequest($projectCreatingRequest)
         );
 
-        return redirect()->route('projects.index');
+        return redirect()->intended(route('projects.index'));
     }
 }
