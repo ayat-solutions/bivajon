@@ -1,6 +1,7 @@
 import Authenticated from "@/Layouts/Authenticated";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CreateProject from "./Components/CreateProject";
+import { Link } from "@inertiajs/inertia-react";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -68,11 +69,9 @@ export default function Projects(props) {
                                                 </th>
                                                 <th
                                                     scope="col"
-                                                    className="relative py-3.5 pl-3 pr-4 sm:pr-6"
+                                                    className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
                                                 >
-                                                    <span className="sr-only">
-                                                        Edit
-                                                    </span>
+                                                    Actions
                                                 </th>
                                             </tr>
                                         </thead>
@@ -81,7 +80,14 @@ export default function Projects(props) {
                                                 (project, index) => (
                                                     <tr key={index}>
                                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                                                            {project.title}
+                                                            <Link
+                                                                href={route(
+                                                                    "projects.show",
+                                                                    project.uuid
+                                                                )}
+                                                            >
+                                                                {project.title}
+                                                            </Link>
                                                         </td>
                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                             {
@@ -89,24 +95,23 @@ export default function Projects(props) {
                                                             }
                                                         </td>
                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                            {project.status}
+                                                            Active
                                                         </td>
                                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                                            {project.date}
+                                                            22-10-2022
                                                         </td>
-                                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                                                            <a
-                                                                href="#"
-                                                                className="text-indigo-600 hover:text-indigo-900"
+
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            <Link
+                                                                href={route(
+                                                                    "projects.show",
+                                                                    project.uuid
+                                                                )}
                                                             >
-                                                                Edit
-                                                                <span className="sr-only">
-                                                                    ,{" "}
-                                                                    {
-                                                                        project.title
-                                                                    }
-                                                                </span>
-                                                            </a>
+                                                                <button class="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
+                                                                    View
+                                                                </button>
+                                                            </Link>
                                                         </td>
                                                     </tr>
                                                 )
