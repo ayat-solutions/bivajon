@@ -1,14 +1,20 @@
-import { Dialog, Transition } from "@headlessui/react";
-import { Inertia } from "@inertiajs/inertia";
-import { usePage } from "@inertiajs/inertia-react";
-import { Fragment, useState } from "react";
+import {Dialog, Transition} from "@headlessui/react";
+import {Inertia} from "@inertiajs/inertia";
+import {usePage} from "@inertiajs/inertia-react";
+import {Fragment, useEffect, useState} from "react";
 
-export default function CreateProject({ isOpen, setIsOpen }) {
-    const { errors } = usePage().props;
+export default function CreateProject({isOpen, setIsOpen}) {
+    const {errors} = usePage().props;
     const [values, setValues] = useState({
         title: "",
         description: "",
     });
+
+    useEffect(() => {
+        if (Object.keys(errors).length === 0) {
+            setIsOpen(false);
+        }
+    }, [errors]); // 👈️ add state variables you want to track
 
     function handleChange(e) {
         const key = e.target.id;
@@ -26,9 +32,6 @@ export default function CreateProject({ isOpen, setIsOpen }) {
     async function handleSubmit(e) {
         e.preventDefault();
         Inertia.post("/projects", values);
-        if (isObjectEmpty(errors)) {
-            setIsOpen(false);
-        }
     }
 
     return (
@@ -47,7 +50,7 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                 >
-                    <div className="fixed inset-0 bg-black bg-opacity-25" />
+                    <div className="fixed inset-0 bg-black bg-opacity-25"/>
                 </Transition.Child>
 
                 <div className="fixed inset-0 overflow-y-auto">
@@ -61,7 +64,8 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                            <Dialog.Panel
+                                className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                                 <Dialog.Title
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-gray-900"
