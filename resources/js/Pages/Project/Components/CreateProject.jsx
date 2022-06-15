@@ -58,35 +58,32 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                                     className="text-lg font-medium leading-6 text-gray-900"
                                 >
                                     Create New Project
-                                </Dialog.Title>
-                                <Dialog.Description className={"mt-4"}>
-                                    {" "}
-                                    <form onSubmit={handleSubmit}>
-                                        <div className="flex flex-col mb-4">
-                                            <label className="mb-2 font-bold text-lg text-gray-900">
-                                                Title
-                                            </label>
-                                            <input
-                                                className="border py-2 px-3 text-grey-800"
-                                                type="text"
-                                                value={values.title}
-                                                onChange={handleChange}
-                                                id="title"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col mb-4">
-                                            <label className="mb-2 font-bold text-lg text-gray-900">
-                                                Description
-                                            </label>
-                                            <textarea
-                                                className="border py-2 px-3 text-grey-800"
-                                                type="text"
-                                                value={values.description}
-                                                onChange={handleChange}
-                                                id="description"
-                                            />
-                                        </div>
-                                    </form>
+                                </Dialog.Title>{" "}
+                                <form onSubmit={handleSubmit}>
+                                    <div className="flex flex-col mb-4">
+                                        <label className="mb-2 font-bold text-lg text-gray-900">
+                                            Title
+                                        </label>
+                                        <input
+                                            className="border py-2 px-3 text-grey-800"
+                                            type="text"
+                                            value={values.title}
+                                            onChange={handleChange}
+                                            id="title"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col mb-4">
+                                        <label className="mb-2 font-bold text-lg text-gray-900">
+                                            Description
+                                        </label>
+                                        <textarea
+                                            className="border py-2 px-3 text-grey-800"
+                                            type="text"
+                                            value={values.description}
+                                            onChange={handleChange}
+                                            id="description"
+                                        />
+                                    </div>
                                     <div className="mt-4 ">
                                         <button
                                             type="submit"
@@ -95,7 +92,7 @@ export default function CreateProject({ isOpen, setIsOpen }) {
                                             Create
                                         </button>
                                     </div>
-                                </Dialog.Description>
+                                </form>
                             </Dialog.Panel>
                         </Transition.Child>
                     </div>
