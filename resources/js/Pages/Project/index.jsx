@@ -2,7 +2,9 @@ import Authenticated from "@/Layouts/Authenticated";
 import { useState } from "react";
 import CreateProject from "./Components/CreateProject";
 import UpdateProject from "./Components/UpdateProject";
+import DeleteProject from "./Components/DeleteProject";
 import { Link } from "@inertiajs/inertia-react";
+import { PencilAltIcon, EyeIcon, TrashIcon } from "@heroicons/react/outline";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -11,11 +13,17 @@ function classNames(...classes) {
 export default function Projects(props) {
     const [isCreate, setIsCreate] = useState(false);
     const [isUpdate, setIsUpdate] = useState(false);
+    const [isDelete, setIsDelete] = useState(false);
     const [currentProject, setCurrentProject] = useState("");
 
     function editProject(project) {
         setCurrentProject(project);
         setIsUpdate(true);
+    }
+
+    function deleteProject(project) {
+        setCurrentProject(project);
+        setIsDelete(true);
     }
 
     return (
@@ -116,21 +124,39 @@ export default function Projects(props) {
                                                                     project.uuid
                                                                 )}
                                                             >
-                                                                <button className="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
-                                                                    View
+                                                                <button className="bg-transparent hover:bg-gray-500 text-gray-700 font-semibold hover:text-white p-1 m-1 border border-gray-500 hover:border-transparent rounded">
+                                                                    <EyeIcon
+                                                                        width={
+                                                                            14
+                                                                        }
+                                                                    />
                                                                 </button>
                                                             </Link>
-                                                        </td>
-                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+
                                                             <button
                                                                 onClick={() => {
                                                                     editProject(
                                                                         project
                                                                     );
                                                                 }}
-                                                                className="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
+                                                                className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white p-1 m-1 border border-blue-500 hover:border-transparent rounded"
                                                             >
-                                                                Edit
+                                                                <PencilAltIcon
+                                                                    width={14}
+                                                                />
+                                                            </button>
+
+                                                            <button
+                                                                onClick={() => {
+                                                                    deleteProject(
+                                                                        project
+                                                                    );
+                                                                }}
+                                                                className="bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white p-1 m-1 border border-red-500 hover:border-transparent rounded"
+                                                            >
+                                                                <TrashIcon
+                                                                    width={14}
+                                                                />
                                                             </button>
                                                         </td>
                                                     </tr>
@@ -148,6 +174,11 @@ export default function Projects(props) {
                     project={currentProject}
                     isOpen={isUpdate}
                     setIsOpen={setIsUpdate}
+                />
+                <DeleteProject
+                    project={currentProject}
+                    isOpen={isDelete}
+                    setIsOpen={setIsDelete}
                 />
             </div>
         </Authenticated>
