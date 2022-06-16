@@ -1,6 +1,7 @@
 import Authenticated from "@/Layouts/Authenticated";
 import { useState } from "react";
 import CreateProject from "./Components/CreateProject";
+import UpdateProject from "./Components/UpdateProject";
 import { Link } from "@inertiajs/inertia-react";
 
 function classNames(...classes) {
@@ -8,7 +9,14 @@ function classNames(...classes) {
 }
 
 export default function Projects(props) {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isCreate, setIsCreate] = useState(false);
+    const [isUpdate, setIsUpdate] = useState(false);
+    const [currentProject, setCurrentProject] = useState("");
+
+    function editProject(project) {
+        setCurrentProject(project);
+        setIsUpdate(true);
+    }
 
     return (
         <Authenticated auth={props.auth} errors={props.errors}>
@@ -29,7 +37,7 @@ export default function Projects(props) {
                                 type="button"
                                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:w-auto"
                                 onClick={() => {
-                                    setIsOpen(true);
+                                    setIsCreate(true);
                                 }}
                             >
                                 Create project
@@ -108,10 +116,22 @@ export default function Projects(props) {
                                                                     project.uuid
                                                                 )}
                                                             >
-                                                                <button class="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
+                                                                <button className="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
                                                                     View
                                                                 </button>
                                                             </Link>
+                                                        </td>
+                                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                            <button
+                                                                onClick={() => {
+                                                                    editProject(
+                                                                        project
+                                                                    );
+                                                                }}
+                                                                className="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded"
+                                                            >
+                                                                Edit
+                                                            </button>
                                                         </td>
                                                     </tr>
                                                 )
@@ -123,7 +143,12 @@ export default function Projects(props) {
                         </div>
                     </div>
                 </>
-                <CreateProject isOpen={isOpen} setIsOpen={setIsOpen} />
+                <CreateProject isOpen={isCreate} setIsOpen={setIsCreate} />
+                <UpdateProject
+                    project={currentProject}
+                    isOpen={isUpdate}
+                    setIsOpen={setIsUpdate}
+                />
             </div>
         </Authenticated>
     );
