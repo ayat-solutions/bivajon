@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateProjectAction;
+use App\Actions\DeleteProjectAction;
 use App\Actions\UpdateProjectAction;
 use App\DataTransferObjects\ProjectDTO;
 use App\Http\Requests\ProjectCreatingRequest;
@@ -41,6 +42,13 @@ class ProjectsController extends Controller
         $projectUuid = UpdateProjectAction::execute(
             ProjectDTO::fromProjectUpdatingRequest($projectUpdatingRequest, $project)
         );
+
+        return redirect()->intended(route('projects.index'));
+    }
+
+    public function destroy(Project $project)
+    {
+        $projectUuid = DeleteProjectAction::execute($project);
 
         return redirect()->intended(route('projects.index'));
     }

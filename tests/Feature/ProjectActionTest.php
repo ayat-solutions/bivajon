@@ -61,4 +61,36 @@ class ProjectActionTest extends TestCase
         $this->assertDatabaseHas('projects', $attr);
     }
 
+    public function test_authorized_user_can_delete_project()
+    {
+        $this->withoutExceptionHandling();
+        $attr = [
+            'title'       => 'Project-01',
+            'description' => $this->faker->sentence,
+        ];
+
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->post('/projects', $attr)
+            ->assertRedirect(route('projects.index'));
+
+        $this->assertDatabaseHas('projects', $attr);
+
+
+        $project = Project::first();
+
+        $this->assertNull($project->deleted_at);
+
+        $this->actingAs($user)
+            ->delete('/projects/'.$project->uuid)
+            ->assertRedirect(route('projects.index'));
+
+        $project->refresh();
+
+        $this->assertNotNull($project->deleted_at,'asd');
+
+    }
+
+
 }

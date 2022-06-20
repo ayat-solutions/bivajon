@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->uuid();
             $table->string('title', 128);
             $table->string('description');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

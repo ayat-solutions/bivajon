@@ -4,6 +4,7 @@ namespace App\Projectors;
 
 use App\Models\Project;
 use App\StorableEvents\ProjectCreated;
+use App\StorableEvents\ProjectDeleted;
 use App\StorableEvents\ProjectUpdated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
@@ -28,5 +29,13 @@ class ProjectProjector extends Projector
                 'title'       => $event->title,
                 'description' => $event->description,
             ]);
+    }
+
+    public function onDeleteProject(ProjectDeleted $event)
+    {
+
+        Project::find($event->aggregateRootUuid())
+            ->writeable()
+            ->delete();
     }
 }
