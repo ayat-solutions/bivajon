@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateProjectAction;
+use App\Actions\UpdateProjectAction;
 use App\DataTransferObjects\ProjectDTO;
 use App\Http\Requests\ProjectCreatingRequest;
+use App\Http\Requests\ProjectUpdatingRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -29,6 +31,15 @@ class ProjectsController extends Controller
     {
         $projectUuid = CreateProjectAction::execute(
             ProjectDTO::fromProjectCreatingRequest($projectCreatingRequest)
+        );
+
+        return redirect()->intended(route('projects.index'));
+    }
+
+    public function update(Project $project, ProjectUpdatingRequest $projectUpdatingRequest)
+    {
+        $projectUuid = UpdateProjectAction::execute(
+            ProjectDTO::fromProjectUpdatingRequest($projectUpdatingRequest, $project)
         );
 
         return redirect()->intended(route('projects.index'));
